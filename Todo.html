@@ -1,0 +1,46 @@
+<html>
+    <script>
+        let globalId=1;
+        function markasDone(id){
+            const parent =document.getElementById(id);
+            parent.children[2].innerHTML="done";
+        }
+        function child(title,description,globalId){
+            const child =document.createElement("div");
+            const child_title=document.createElement("div");
+            child_title.innerHTML=title;
+            const child_desc=document.createElement("div");
+            child_desc.innerHTML=description;
+            const button=document.createElement("button");
+            button.innerHTML="mark as done " + globalId;
+           
+            button.setAttribute("onclick",`markasDone(${globalId})`);
+            child.appendChild(child_title);
+            child.appendChild(child_desc);
+            child.appendChild(button);
+            child.setAttribute("id",globalId);
+            return child;
+
+        }
+        function addTodo(){
+            const title = document.getElementById("title").value;
+            const description=document.getElementById("description").value;
+            // here parent is container where todo list  are added.
+            const parent =document.getElementById("container");
+            // child indicates out each  todo 
+            //which we are going to append in the list(container)
+            parent.appendChild(child(title,description,globalId++));
+            
+        }
+    </script>
+   
+      <div>
+          <input id="title" type="text" placeholder="title"></input><br></br>
+          <input id="description"  type="text" placeholder="description"></input><br></br>
+          <button  onclick="addTodo()">Add todo</button> 
+     
+      </div>
+      <div id="container">
+        
+      </div>
+</html>
